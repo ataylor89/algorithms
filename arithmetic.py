@@ -1,8 +1,7 @@
-# This code is contributed by 
-# Smitha Dinesh Semwal 
+# The add function is contributed by Smitha Dinesh Semwal 
 # https://www.geeksforgeeks.org/add-two-numbers-without-using-arithmetic-operators/
 
-def Add(x, y): 
+def add(x, y): 
   
     # Iterate till there is no carry  
     while (y != 0): 
@@ -20,5 +19,16 @@ def Add(x, y):
         y = carry << 1
       
     return x 
+
+def subtract(x, y):
+
+    while (y != 0):
+    
+       borrow = (~x) & y
+
+       x = x ^ y
+
+       y = borrow << 1
   
-print(Add(15, 32))
+print("15 + 32 = " + str(add(15, 32)))
+print("30 - 15 = " + str(subtract(30, 15)))
