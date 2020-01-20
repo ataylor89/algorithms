@@ -29,6 +29,8 @@ def subtract(x, y):
        x = x ^ y
 
        y = borrow << 1
+
+    return x
   
 print("15 + 32 = " + str(add(15, 32)))
 print("30 - 15 = " + str(subtract(30, 15)))
