@@ -1,7 +1,7 @@
 # The add function is contributed by Smitha Dinesh Semwal 
 # https://www.geeksforgeeks.org/add-two-numbers-without-using-arithmetic-operators/
 
-def add(x, y): 
+def _add(x, y): 
   
     # Iterate till there is no carry  
     while (y != 0): 
@@ -20,7 +20,7 @@ def add(x, y):
       
     return x 
 
-def subtract(x, y):
+def _subtract(x, y):
 
     while (y != 0):
     
@@ -31,6 +31,28 @@ def subtract(x, y):
        y = borrow << 1
 
     return x
-  
-print("15 + 32 = " + str(add(15, 32)))
-print("30 - 15 = " + str(subtract(30, 15)))
+ 
+def add(x, y):
+    
+    if x >= 0 and y >= 0:
+        return _add(x, y)
+
+    if x >= 0 and y < 0:
+        if -y > x:
+            return -_subtract(-y, x)
+        else:
+            return _subtract(x, -y)
+
+    if x < 0 and y >= 0:
+        if -x > y:
+            return -_subtract(-x, y)
+        else:
+            return _subtract(y, -x)
+
+    if x < 0 and y < 0:
+        return -_add(-x, -y)
+
+ 
+print("15  +   32 = " + str(add(15, 32)))
+print("30  +  -15 = " + str(add(30, -15)))
+print("10  +  -15 = " + str(add(10, -15)))
