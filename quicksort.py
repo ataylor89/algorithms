@@ -1,3 +1,34 @@
+# Quicksort is probably my favorite sorting algorithm
+# It's right up there with merge sort as one of the fastest and most efficient sorting algorithms
+#
+# Quicksort has an average case performance of O(n log n) and a worst case performance of O(n^2)
+# I think that merge sort has an average case performance of O(n log n) and a worst case performance of O(n log n)
+#
+# Merge sort has a better worst case performance than quicksort, but...
+# Quicksort has the advantage that it uses less memory than merge sort
+#
+# Honestly, it is very difficult to memorize a sorting algorithm
+# Also, it is very difficult to write a sorting algorithm from scratch if you forget the implementation
+#
+# I would like to commit quicksort to memory, because it is very useful to know a sorting algorithm
+#
+# There are so many sorting algorithms out there (quicksort, mergesort, heapsort, bubblesort),
+# but I think that quicksort is the algorithm that I want to commit to memory
+#
+# Quicksort is the algorithm that I want to memorize, because it is very fast, very efficient,
+# and it makes more sense to me than many other sorting algorithms
+#
+# Algorithms are a really important part of computer science
+#
+# In my opinion, an algorithm is a list of instructions
+# In my opinion, a data structure is just a database
+#
+# I am familiar with many algorithms in cryptography (rsa, xor, rot13, rot88)
+# I am also familiar with many algorithms in searching and sorting (quicksort, binary search, searching a graph, etc)
+#
+# It is really rewarding to learn more about algorithms and data structures
+# Algorithms and data structures are an essential part of computer science
+
 import random
 import time
 import argparse
