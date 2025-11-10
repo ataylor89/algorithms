@@ -68,6 +68,9 @@
 #
 # % python quicksort.py -i unsorted.txt -o sorted.txt
 # The quicksort algorithm completed in 0.0091 milliseconds
+#
+# % cat sorted.txt
+# [0, 0, 1, 6, 6, 7, 8, 8, 9, 10]
 
 import random
 import time
