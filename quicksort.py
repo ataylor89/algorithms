@@ -22,8 +22,8 @@ def quicksort(arr, low, high):
         quicksort(arr, low, pivot_index - 1)
         quicksort(arr, pivot_index + 1, high)
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(prog="quicksort.py", description="Sort a list")
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(prog='quicksort.py', description='Sort a list')
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('-i', '--inputfile', type=str)
     group.add_argument('-n', '--numbers', nargs='+', type=int) 
