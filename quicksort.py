@@ -28,6 +28,46 @@
 #
 # It is really rewarding to learn more about algorithms and data structures
 # Algorithms and data structures are an essential part of computer science
+#
+# ###### Examples ######
+#
+# Example #1:
+#
+# % python quicksort.py -n 12 3 7 20 40 5 26 29
+# Unsorted list:
+# [12, 3, 7, 20, 40, 5, 26, 29]
+#
+# Sorted list:
+# [3, 5, 7, 12, 20, 26, 29, 40]
+#
+# The quicksort algorithm completed in 0.0081 milliseconds
+#
+# Example #2:
+#
+# % python quicksort.py -r -s 10 -min 0 -max 10
+# Randomly generated list:
+# [10, 7, 1, 5, 5, 10, 8, 3, 8, 1]
+#
+# Sorted list:
+# [1, 1, 3, 5, 5, 7, 8, 8, 10, 10]
+#
+# The quicksort algorithm completed in 0.0088 milliseconds
+#
+# Example #3:
+#
+# % cat unsorted.txt
+# [6, 8, 1, 10, 8, 6, 7, 0, 0, 9]
+#
+# % python quicksort.py -i unsorted.txt
+# Sorted list:
+# [0, 0, 1, 6, 6, 7, 8, 8, 9, 10]
+#
+# The quicksort algorithm completed in 0.0100 milliseconds
+#
+# Example #4:
+#
+# % python quicksort.py -i unsorted.txt -o sorted.txt
+# The quicksort algorithm completed in 0.0091 milliseconds
 
 import random
 import time
