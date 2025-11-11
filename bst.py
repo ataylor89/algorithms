@@ -5,11 +5,18 @@ import ast
 
 class BinarySearchTree:
     def __init__(self, arr=None):
-        self.root = None
         if arr:
-            self._balance(sorted(arr))
+            self.balance(arr)
+        else:
+            self.root = None
+            self.arr = []
 
-    def _balance(self, arr):
+    def balance(self, arr=None):
+        self.root = None
+        if arr is None:
+            arr = self.arr
+        self.arr = []
+        arr.sort()
         sieve = [False] * len(arr)
         delta = int(len(arr) / 2)
         while delta > 0:
@@ -23,24 +30,22 @@ class BinarySearchTree:
             delta = int(delta/2)
         self.insert(arr[0])
 
-    def balance(self):
-        arr = self.tolist()
-        self.root = None
-        self._balance(arr)
-
     def insert(self, value):
         if self.root is None:
             self.root = Node(value)
+            self.arr.append(value)
             return
         node = self.root
         while node:
             if value <= node.value and node.left is None:
                 node.left = Node(value)
+                self.arr.append(value)
                 return
             elif value <= node.value:
                 node = node.left
             elif value > node.value and node.right is None:
                 node.right = Node(value)
+                self.arr.append(value)
                 return
             elif value > node.value:
                 node = node.right
@@ -58,17 +63,19 @@ class BinarySearchTree:
                 node = node.right
         return False
 
-    def _tolist(self, node, arr):
+    def _height(self, node, height):
         if node is None:
             return
-        self._tolist(node.left, arr)
-        arr.append(node.value)
-        self._tolist(node.right, arr)
+        height += 1
+        if height > self.h:
+            self.h = height
+        self._height(node.left, height + 1)
+        self._height(node.right, height + 1)
 
-    def tolist(self):
-        arr = []
-        self._tolist(self.root, arr)
-        return arr
+    def height(self):
+        self.h = 0
+        self._height(self.root, 0)
+        return self.h
 
 class Node:
     def __init__(self, value):
@@ -93,13 +100,15 @@ if __name__ == '__main__':
             arr = ast.literal_eval(contents)
     elif args.numbers:
         arr = args.numbers
-        print(f'Unsorted list:\n{arr}\n')
+        print(f'Unsorted list:\n\n{arr}\n')
     elif args.random:
         size, min, max = int(args.size), int(args.minimum), int(args.maximum)
         arr = [random.randint(min, max) for i in range(size)]
         if size < 1000:
-            print(f'Randomly generated list:\n{arr}\n')
+            print(f'Randomly generated list:\n\n{arr}\n')
     tree = BinarySearchTree(arr)
+    height = tree.height()
+    print(f'The binary search tree has a height of {height}\n')
     print('Linear search\n--------------')
     for i in range(len(args.test)):
         value = args.test[i]
