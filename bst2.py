@@ -197,6 +197,29 @@ class BinarySearchTree:
         self._calculate_size(self.root)
         return self.size
 
+    def str(self, node):
+        if node is None:
+            return ''
+        elif node.left is None and node.right is None:
+            return f'{node.value}'
+        elif node.left and node.right is None:
+            leftchild = self.str(node.left)
+            return f'{node.value}({leftchild})'
+        elif node.left is None and node.right:
+            rightchild = self.str(node.right)
+            return f'{node.value}({rightchild})'
+        else:
+            leftchild = self.str(node.left)
+            rightchild = self.str(node.right)
+            return f'{node.value}({leftchild})({rightchild})'
+
+    def __str__(self):
+        size = self.calculate_size()
+        if size <= 100:
+            return self.str(self.root)
+        height = self.calculate_height()
+        return f'Size: {size} Height: {height}'
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -204,7 +227,7 @@ class Node:
         self.right = None
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog='bst.py', description='Binary search')
+    parser = argparse.ArgumentParser(prog='bst2.py', description='Binary search')
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('-i', '--inputfile', type=str)
     group.add_argument('-n', '--numbers', nargs='+', type=int) 
@@ -220,17 +243,28 @@ if __name__ == '__main__':
             arr = ast.literal_eval(contents)
     elif args.numbers:
         arr = args.numbers
-        print(f'Unsorted list:\n\n{arr}\n')
+        print(f'Unsorted list')
+        print('------------------------------')
+        print(f'{arr}\n')
     elif args.random:
         size, min, max = int(args.size), int(args.minimum), int(args.maximum)
         arr = [random.randint(min, max) for i in range(size)]
         if size < 1000:
-            print(f'Randomly generated list:\n\n{arr}\n')
+            print(f'Randomly generated list')
+            print('------------------------------')
+            print(f'{arr}\n')
     tree = BinarySearchTree(arr)
     size = tree.calculate_size()
     height = tree.calculate_height()
+    print('Statistics')
+    print('------------------------------')
     print(f'The binary search tree has a size of {size} and a height of {height}\n')
-    print('Linear search\n--------------')
+    print('String representation')
+    print('------------------------------')
+    print(tree)
+    print('')
+    print('Linear search results')
+    print('------------------------------')
     for i in range(len(args.test)):
         value = args.test[i]
         start_time = time.time()
@@ -245,7 +279,8 @@ if __name__ == '__main__':
         if i < len(args.test) - 1:
             print('')
     print('')
-    print('Binary search\n--------------')
+    print('Binary search results')
+    print('------------------------------')
     for i in range(len(args.test)):
         value = args.test[i]
         start_time = time.time()
