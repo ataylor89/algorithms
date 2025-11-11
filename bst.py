@@ -64,12 +64,14 @@ class BinarySearchTree:
         else:
             self.root = None
             self.arr = []
+            self.height = 0
 
     def balance(self, arr=None):
         self.root = None
         if arr is None:
             arr = self.arr
         self.arr = []
+        self.height = 0
         arr.sort()
         sieve = [False] * len(arr)
         delta = int(len(arr) / 2)
@@ -90,7 +92,11 @@ class BinarySearchTree:
             self.arr.append(value)
             return
         node = self.root
+        height = 0
         while node:
+            height += 1
+            if height > self.height:
+                self.height = height
             if value <= node.value and node.left is None:
                 node.left = Node(value)
                 self.arr.append(value)
@@ -103,7 +109,7 @@ class BinarySearchTree:
                 return
             elif value > node.value:
                 node = node.right
-    
+
     def search(self, value):
         if self.root is None:
             return False
@@ -116,20 +122,6 @@ class BinarySearchTree:
             elif value > node.value:
                 node = node.right
         return False
-
-    def _height(self, node, height):
-        if node is None:
-            return
-        height += 1
-        if height > self.h:
-            self.h = height
-        self._height(node.left, height)
-        self._height(node.right, height)
-
-    def height(self):
-        self.h = 0
-        self._height(self.root, 0)
-        return self.h
 
 class Node:
     def __init__(self, value):
@@ -161,8 +153,7 @@ if __name__ == '__main__':
         if size < 1000:
             print(f'Randomly generated list:\n\n{arr}\n')
     tree = BinarySearchTree(arr)
-    height = tree.height()
-    print(f'The binary search tree has a height of {height}\n')
+    print(f'The binary search tree has a height of {tree.height}\n')
     print('Linear search\n--------------')
     for i in range(len(args.test)):
         value = args.test[i]
