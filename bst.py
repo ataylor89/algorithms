@@ -1,3 +1,57 @@
+# ###### Examples ######
+#
+# Example #1:
+#
+# % cat unsorted.txt
+# [7, 6, 5, 0, 8, 6, 8, 1, 6, 7]
+#
+# % python bst.py -i unsorted.txt -t 2
+# The binary search tree has a height of 4
+#
+# Linear search
+# --------------
+# 2 is missing
+# The linear search took 0.0041 milliseconds
+#
+# Binary search
+# --------------
+# 2 is missing
+# The binary search took 0.0012 milliseconds
+#
+# Example #2:
+#
+# % python bst.py -n 10 2 12 4 7 8 9 20 30 4 7 5 -t 11
+# Unsorted list:
+#
+# [10, 2, 12, 4, 7, 8, 9, 20, 30, 4, 7, 5]
+#
+# The binary search tree has a height of 5
+#
+# Linear search
+# --------------
+# 11 is missing
+# The linear search took 0.0041 milliseconds
+#
+# Binary search
+# --------------
+# 11 is missing
+# The binary search took 0.0010 milliseconds
+#
+# Example #3:
+#
+# % python bst.py -r -s 1e4 -min 0 -max 1e4 -t 1337
+# The binary search tree has a height of 21
+#
+# Linear search
+# --------------
+# 1337 is present
+# The linear search took 0.0830 milliseconds
+#
+# Binary search
+# --------------
+# 1337 is present
+# The binary search took 0.0029 milliseconds
+
 import random
 import time
 import argparse
