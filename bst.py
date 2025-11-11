@@ -69,8 +69,8 @@ class BinarySearchTree:
         height += 1
         if height > self.h:
             self.h = height
-        self._height(node.left, height + 1)
-        self._height(node.right, height + 1)
+        self._height(node.left, height)
+        self._height(node.right, height)
 
     def height(self):
         self.h = 0
