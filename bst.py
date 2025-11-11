@@ -6,7 +6,6 @@ import ast
 class BinarySearchTree:
     def __init__(self, arr=None):
         self.root = None
-        self.arr = []
         if arr:
             self._balance(sorted(arr))
 
@@ -25,27 +24,23 @@ class BinarySearchTree:
         self.insert(arr[0])
 
     def balance(self):
-        tmp = self.arr
+        arr = self.tolist()
         self.root = None
-        self.arr = []
-        self._balance(tmp)
+        self._balance(arr)
 
     def insert(self, value):
         if self.root is None:
             self.root = Node(value)
-            self.arr.append(value)
             return
         node = self.root
         while node:
             if value <= node.value and node.left is None:
                 node.left = Node(value)
-                self.arr.append(value)
                 return
             elif value <= node.value:
                 node = node.left
             elif value > node.value and node.right is None:
                 node.right = Node(value)
-                self.arr.append(value)
                 return
             elif value > node.value:
                 node = node.right
@@ -62,6 +57,18 @@ class BinarySearchTree:
             elif value > node.value:
                 node = node.right
         return False
+
+    def _tolist(self, node, arr):
+        if node is None:
+            return
+        self._tolist(node.left, arr)
+        arr.append(node.value)
+        self._tolist(node.right, arr)
+
+    def tolist(self):
+        arr = []
+        self._tolist(self.root, arr)
+        return arr
 
 class Node:
     def __init__(self, value):
