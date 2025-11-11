@@ -104,6 +104,7 @@ import ast
 class BinarySearchTree:
     def __init__(self, arr=None):
         self.root = None
+        self.size = 0
         self.height = 0
         if arr:
             arr.sort()
@@ -184,6 +185,18 @@ class BinarySearchTree:
         self._calculate_height(self.root, 0)
         return self.height
 
+    def _calculate_size(self, node):
+        if node is None:
+            return
+        self.size += 1
+        self._calculate_size(node.left)
+        self._calculate_size(node.right)
+
+    def calculate_size(self):
+        self.size = 0
+        self._calculate_size(self.root)
+        return self.size
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -214,8 +227,9 @@ if __name__ == '__main__':
         if size < 1000:
             print(f'Randomly generated list:\n\n{arr}\n')
     tree = BinarySearchTree(arr)
+    size = tree.calculate_size()
     height = tree.calculate_height()
-    print(f'The binary search tree has a height of {height}\n')
+    print(f'The binary search tree has a size of {size} and a height of {height}\n')
     print('Linear search\n--------------')
     for i in range(len(args.test)):
         value = args.test[i]

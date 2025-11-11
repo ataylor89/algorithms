@@ -155,7 +155,7 @@ if __name__ == '__main__':
         if size < 1000:
             print(f'Randomly generated list:\n\n{arr}\n')
     tree = BinarySearchTree(arr)
-    print(f'The binary search tree has a height of {tree.height}\n')
+    print(f'The binary search tree has a size of {len(tree.arr)} and a height of {tree.height}\n')
     print('Linear search\n--------------')
     for i in range(len(args.test)):
         value = args.test[i]
