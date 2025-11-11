@@ -90,25 +90,27 @@ class BinarySearchTree:
         if self.root is None:
             self.root = Node(value)
             self.arr.append(value)
+            self.height = 1
             return
         node = self.root
-        height = 0
-        while node:
-            height += 1
-            if height > self.height:
-                self.height = height
+        height = 1
+        done = False
+        while not done:
             if value <= node.value and node.left is None:
                 node.left = Node(value)
                 self.arr.append(value)
-                return
+                done = True
             elif value <= node.value:
                 node = node.left
             elif value > node.value and node.right is None:
                 node.right = Node(value)
                 self.arr.append(value)
-                return
+                done = True
             elif value > node.value:
                 node = node.right
+            height += 1
+            if height > self.height:
+                self.height = height
 
     def search(self, value):
         if self.root is None:
