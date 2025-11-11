@@ -171,18 +171,17 @@ class BinarySearchTree:
         return arr
 
     def _calculate_height(self, node, height):
-        if node.left:
-            self._calculate_height(node.left, height + 1)
-        if node.right:
-            self._calculate_height(node.right, height + 1)
-        if node.left is None and node.right is None:
-            if height > self.height:
-                self.height = height
+        if node is None:
+            return
+        height += 1
+        if height > self.height:
+            self.height = height
+        self._calculate_height(node.left, height)
+        self._calculate_height(node.right, height)
 
     def calculate_height(self):
         self.height = 0
-        if self.root:
-            self._calculate_height(self.root, 1)
+        self._calculate_height(self.root, 0)
         return self.height
 
 class Node:
