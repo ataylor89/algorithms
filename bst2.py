@@ -243,17 +243,14 @@ if __name__ == '__main__':
             arr = ast.literal_eval(contents)
     elif args.numbers:
         arr = args.numbers
-        print(f'Unsorted list')
-        print('------------------------------')
-        print(f'{arr}\n')
     elif args.random:
         size, min, max = int(args.size), int(args.minimum), int(args.maximum)
         arr = [random.randint(min, max) for i in range(size)]
-        if size < 1000:
-            print(f'Randomly generated list')
-            print('------------------------------')
-            print(f'{arr}\n')
     tree = BinarySearchTree(arr)
+    if len(arr) < 1000:
+        print(f'Unsorted list')
+        print('------------------------------')
+        print(f'{arr}\n')
     size = tree.calculate_size()
     height = tree.calculate_height()
     print('Statistics')
