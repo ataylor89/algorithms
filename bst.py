@@ -150,20 +150,16 @@ class BinarySearchTree:
             arr.sort()
             self._balance(arr, 0, len(arr) - 1)
 
-    def _balance(self, arr, low, high):
-        if low > high:
+    def _balance(self, arr, start, end):
+        if start > end:
             return
-        pivot_index = low + int((high - low + 1) / 2)
-        pivot = arr[pivot_index]
-        self.insert(pivot)
-        if low < pivot_index:
-            self._balance(arr, low, pivot_index - 1)
-        if pivot_index < high:
-            self._balance(arr, pivot_index + 1, high)
+        mid = (start + end) // 2
+        self.insert(arr[mid])
+        self._balance(arr, start, mid - 1)
+        self._balance(arr, mid + 1, end)
 
     def balance(self):
         arr = self.tolist()
-        self.root = None
         self._balance(arr, 0, len(arr) - 1)
 
     def _insert(self, node, value):
