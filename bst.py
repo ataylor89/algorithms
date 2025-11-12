@@ -144,10 +144,10 @@ class BinarySearchTree:
     def str(self):
         if len(self.arr) <= 100:
             return self._str(self.root)
-        root = self.root.value
+        root_value = self.root.value
         size = len(self.arr)
         height = self.height
-        return f'Root value: {root} Size: {size} Height: {height}'
+        return f'Root value: {root_value} Size: {size} Height: {height}'
 
     def __str__(self):
         return self.str()
