@@ -220,8 +220,7 @@ class BinarySearchTree:
     def search(self, value):
         return self._search(self.root, value)
 
-    def get_successor(self, node):
-        node = node.right
+    def find_min_node(self, node):
         while node is not None and node.left is not None:
             node = node.left
         return node
@@ -238,9 +237,9 @@ class BinarySearchTree:
                 return node.right
             if node.right is None:
                 return node.left
-            succ = self.get_successor(node)
-            node.value = succ.value
-            node.right = self._delete(node.right, succ.value)
+            successor = self.find_min_node(node.right)
+            node.value = successor.value
+            node.right = self._delete(node.right, successor.value)
         return node
 
     def delete(self, value):
