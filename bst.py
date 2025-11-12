@@ -292,7 +292,7 @@ if __name__ == '__main__':
         print('------------------------------')
         print(f'{arr}\n')
     tree = BinarySearchTree(arr)
-    print('Statistics')
+    print('Stats')
     print('------------------------------')
     print(tree.stats())
     if tree.node_count <= 1000:
