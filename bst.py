@@ -277,6 +277,7 @@ if __name__ == '__main__':
     parser.add_argument('-min', '--minimum', type=float, default=0)
     parser.add_argument('-max', '--maximum', type=float, default=100)
     parser.add_argument('-t', '--test', nargs='+', type=int)
+    parser.add_argument('-o', '--outputfile', type=str)
     args = parser.parse_args()
     if args.inputfile:
         with open(args.inputfile, 'r') as file:
@@ -295,11 +296,12 @@ if __name__ == '__main__':
     print('Statistics')
     print('------------------------------')
     print(tree.stats())
+    prefix_expression = tree.str()
     if tree.node_count <= 1000:
         print('')
         print('String representation')
         print('------------------------------')
-        print(tree)
+        print(prefix_expression)
     if args.test:
         print('')
         print('Linear search results')
@@ -329,3 +331,6 @@ if __name__ == '__main__':
             print(f'The binary search took {time_elapsed:.4f} milliseconds')
             if i < len(args.test) - 1:
                 print('')
+    if args.outputfile:
+        with open(args.outputfile, 'w') as file:
+            file.write(prefix_expression)
