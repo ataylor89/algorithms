@@ -47,7 +47,7 @@
 #
 # We often push a function's arguments, local variables, and return address onto the stack
 #
-# Also, we sometimes push callee-saved registers onto the stack
+# Also, we sometimes push register values onto the stack, so that we can restore these values when the function returns
 #
 # This means that there is overhead to every function call
 #
