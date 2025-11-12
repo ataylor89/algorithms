@@ -83,57 +83,84 @@
 #
 # ###### Examples ######
 #
-# Example #1:
+# Example 1: Create a binary search tree out of a list of elements
+#
+# % python bst.py -n 0 1 2 3 4 5 6 7 8 9
+# Unsorted list
+# ------------------------------
+# [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+#
+# Statistics
+# ------------------------------
+# Root value: 4 Node count: 10 Value count: 10 Height: 4
+#
+# String representation
+# ------------------------------
+# 4(1(0)(2(3)))(7(5(6))(8(9)))
+#
+# Example 2: Create a binary search tree out of a randomly generated list of elements
+#
+# % python bst.py -r -s 10 -min 0 -max 10
+# Unsorted list
+# ------------------------------
+# [8, 5, 0, 7, 6, 0, 6, 7, 5, 4]
+#
+# Statistics
+# ------------------------------
+# Root value: 5 Node count: 6 Value count: 10 Height: 3
+#
+# String representation
+# ------------------------------
+# 5(0(4))(7(6)(8))
+#
+# Example 3: Create a binary search tree from an input file and search the tree for a given value
 #
 # % cat unsorted.txt
-# [7, 6, 5, 0, 8, 6, 8, 1, 6, 7]
+# [5, 3, 2, 1, 4]
 #
-# % python bst.py -i unsorted.txt -t 2
-# The binary search tree has a height of 4
+# % python bst.py -i unsorted.txt -t 3
+# Unsorted list
+# ------------------------------
+# [5, 3, 2, 1, 4]
 #
-# Linear search
-# --------------
-# 2 is missing
-# The linear search took 0.0041 milliseconds
+# Statistics
+# ------------------------------
+# Root value: 3 Node count: 5 Value count: 5 Height: 3
 #
-# Binary search
-# --------------
-# 2 is missing
-# The binary search took 0.0012 milliseconds
+# String representation
+# ------------------------------
+# 3(1(2))(4(5))
 #
-# Example #2:
+# Linear search results
+# ------------------------------
+# 3 is present
+# The linear search took 0.0010 milliseconds
 #
-# % python bst.py -n 10 2 12 4 7 8 9 20 30 4 7 5 -t 11
-# Unsorted list:
+# Binary search results
+# ------------------------------
+# 3 is present
+# The binary search took 0.0007 milliseconds
 #
-# [10, 2, 12, 4, 7, 8, 9, 20, 30, 4, 7, 5]
+# Example 4: Create a binary search tree from an input file and write its string representation to an output file
 #
-# The binary search tree has a height of 5
+# % cat unsorted.txt
+# [5, 3, 2, 1, 4]
 #
-# Linear search
-# --------------
-# 11 is missing
-# The linear search took 0.0041 milliseconds
+# % python bst.py -i unsorted.txt -o tree.txt
+# Unsorted list
+# ------------------------------
+# [5, 3, 2, 1, 4]
 #
-# Binary search
-# --------------
-# 11 is missing
-# The binary search took 0.0010 milliseconds
+# Statistics
+# ------------------------------
+# Root value: 3 Node count: 5 Value count: 5 Height: 3
 #
-# Example #3:
+# String representation
+# ------------------------------
+# 3(1(2))(4(5))
 #
-# % python bst.py -r -s 1e4 -min 0 -max 1e4 -t 1337
-# The binary search tree has a height of 21
-#
-# Linear search
-# --------------
-# 1337 is present
-# The linear search took 0.0830 milliseconds
-#
-# Binary search
-# --------------
-# 1337 is present
-# The binary search took 0.0029 milliseconds
+# % cat tree.txt
+# 3(1(2))(4(5))
 
 import random
 import time
