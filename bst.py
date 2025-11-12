@@ -125,26 +125,32 @@ class BinarySearchTree:
                 node = node.right
         return False
 
-    def str(self, node):
+    def _str(self, node):
         if node is None:
             return ''
         elif node.left is None and node.right is None:
             return f'{node.value}'
         elif node.left and node.right is None:
-            leftchild = self.str(node.left)
+            leftchild = self._str(node.left)
             return f'{node.value}({leftchild})'
         elif node.left is None and node.right:
-            rightchild = self.str(node.right)
+            rightchild = self._str(node.right)
             return f'{node.value}({rightchild})'
         else:
-            leftchild = self.str(node.left)
-            rightchild = self.str(node.right)
+            leftchild = self._str(node.left)
+            rightchild = self._str(node.right)
             return f'{node.value}({leftchild})({rightchild})'
 
-    def __str__(self):
+    def str(self):
         if len(self.arr) <= 100:
-            return self.str(self.root)
-        return f'Size: {len(self.arr)} Height: {self.height}'
+            return self._str(self.root)
+        root = self.root.value
+        size = len(self.arr)
+        height = self.height
+        return f'Root value: {root} Size: {size} Height: {height}'
+
+    def __str__(self):
+        return self.str()
 
 class Node:
     def __init__(self, value):
@@ -172,11 +178,11 @@ if __name__ == '__main__':
     elif args.random:
         size, min, max = int(args.size), int(args.minimum), int(args.maximum)
         arr = [random.randint(min, max) for i in range(size)]
-    tree = BinarySearchTree(arr)
     if len(arr) < 1000:
         print(f'Unsorted list')
         print('------------------------------')
         print(f'{arr}\n')
+    tree = BinarySearchTree(arr)
     print('Statistics')
     print('------------------------------')
     print(f'The binary search tree has a size of {len(tree.arr)} and a height of {tree.height}\n')
