@@ -298,9 +298,6 @@ if __name__ == '__main__':
         print('------------------------------')
         print(f'{arr}\n')
     tree = BinarySearchTree(arr)
-    root_value = tree.root.value if tree.root else None
-    node_count, value_count = tree.calculate_size()
-    height = tree.calculate_height()
     print('Statistics')
     print('------------------------------')
     print(tree.stats())
