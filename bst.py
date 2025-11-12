@@ -193,11 +193,13 @@ class BinarySearchTree:
     def search(self, value):
         return self._search(self.root, value)
 
+    # We perform an inorder traversal to get a list of values in increasing order
     def _tolist(self, node, arr):
         if node is None:
             return
         self._tolist(node.left, arr)
-        arr.append(node.value)
+        for i in range(node.frequency):
+            arr.append(node.value)
         self._tolist(node.right, arr)
 
     def tolist(self):
@@ -233,6 +235,7 @@ class BinarySearchTree:
         self._calculate_size(self.root)
         return (self.node_count, self.value_count)
 
+    # We perform a preorder traversal to get a string representation of the binary search tree
     def _str(self, node):
         if node is None:
             return ''
