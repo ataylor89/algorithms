@@ -249,12 +249,7 @@ class BinarySearchTree:
             return f'{node.value}({leftchild})({rightchild})'
 
     def str(self):
-        node_count, value_count = self.calculate_size()
-        if node_count <= 100:
-            return self._str(self.root)
-        root_value = self.root.value
-        height = self.calculate_height()
-        return f'Root value: {root_value} Node count: {node_count} Value count: {value_count} Height: {height}'
+        return self._str(self.root)
 
     def __str__(self):
         return self.str()
@@ -292,7 +287,7 @@ if __name__ == '__main__':
     elif args.random:
         size, min, max = int(args.size), int(args.minimum), int(args.maximum)
         arr = [random.randint(min, max) for i in range(size)]
-    if len(arr) < 1000:
+    if len(arr) <= 1000:
         print(f'Unsorted list')
         print('------------------------------')
         print(f'{arr}\n')
@@ -300,10 +295,11 @@ if __name__ == '__main__':
     print('Statistics')
     print('------------------------------')
     print(tree.stats())
-    print('')
-    print('String representation')
-    print('------------------------------')
-    print(tree)
+    if tree.node_count <= 1000:
+        print('')
+        print('String representation')
+        print('------------------------------')
+        print(tree)
     if args.test:
         print('')
         print('Linear search results')
