@@ -140,23 +140,18 @@ class BinarySearchTree:
 
     def insert(self, value):
         self.root = self._insert(self.root, value)
-        return self.root
 
     def _search(self, node, value):
-        if value == node.value:
-            return True
-        elif value < node.value and node.left is None:
+        if node is None:
             return False
+        elif value == node.value:
+            return True
         elif value < node.value:
             return self._search(node.left, value)
-        elif value > node.value and node.right is None:
-            return False
-        elif value > node.value:
+        else:
             return self._search(node.right, value)
 
     def search(self, value):
-        if self.root is None:
-            return False
         return self._search(self.root, value)
 
     def _tolist(self, node, arr):
