@@ -104,7 +104,8 @@ import ast
 class BinarySearchTree:
     def __init__(self, arr=None):
         self.root = None
-        self.size = 0
+        self.node_count = 0
+        self.value_count = 0
         self.height = 0
         if arr:
             arr.sort()
@@ -127,20 +128,19 @@ class BinarySearchTree:
         self._balance(arr, 0, len(arr) - 1)
 
     def _insert(self, node, value):
-        if value <= node.value and node.left is None:
-            node.left = Node(value)
-        elif value <= node.value:
-            self._insert(node.left, value)
-        elif value > node.value and node.right is None:
-            node.right = Node(value)
-        elif value > node.value:
-            self._insert(node.right, value)
+        if node is None:
+            node = Node(value)
+        elif value == node.value:
+            node.frequency += 1
+        elif value < node.value:
+            node.left = self._insert(node.left, value)
+        else:
+            node.right = self._insert(node.right, value)
+        return node
 
     def insert(self, value):
-        if self.root is None:
-            self.root = Node(value)
-        else:
-            self._insert(self.root, value)
+        self.root = self._insert(self.root, value)
+        return self.root
 
     def _search(self, node, value):
         if value == node.value:
@@ -188,14 +188,16 @@ class BinarySearchTree:
     def _calculate_size(self, node):
         if node is None:
             return
-        self.size += 1
+        self.node_count += 1
+        self.value_count += node.frequency
         self._calculate_size(node.left)
         self._calculate_size(node.right)
 
     def calculate_size(self):
-        self.size = 0
+        self.node_count = 0
+        self.value_count = 0
         self._calculate_size(self.root)
-        return self.size
+        return (self.node_count, self.value_count)
 
     def _str(self, node):
         if node is None:
@@ -214,21 +216,28 @@ class BinarySearchTree:
             return f'{node.value}({leftchild})({rightchild})'
 
     def str(self):
-        size = self.calculate_size()
-        if size <= 100:
+        node_count, value_count = self.calculate_size()
+        if node_count <= 100:
             return self._str(self.root)
         root_value = self.root.value
         height = self.calculate_height()
-        return f'Root value: {root_value} Size: {size} Height: {height}'
+        return f'Root value: {root_value} Node count: {node_count} Value count: {value_count} Height: {height}'
 
     def __str__(self):
         return self.str()
+
+    def stats(self):
+        root_value = self.root.value if self.root else None
+        node_count, value_count = self.calculate_size()
+        height = self.calculate_height()
+        return f'Root value: {root_value} Node count: {node_count} Value count: {value_count} Height: {height}'
 
 class Node:
     def __init__(self, value):
         self.value = value
         self.left = None
         self.right = None
+        self.frequency = 1
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='bst2.py', description='Binary search')
@@ -255,11 +264,13 @@ if __name__ == '__main__':
         print('------------------------------')
         print(f'{arr}\n')
     tree = BinarySearchTree(arr)
-    size = tree.calculate_size()
+    root_value = tree.root.value if tree.root else None
+    node_count, value_count = tree.calculate_size()
     height = tree.calculate_height()
     print('Statistics')
     print('------------------------------')
-    print(f'The binary search tree has a size of {size} and a height of {height}\n')
+    print(tree.stats())
+    print('')
     print('String representation')
     print('------------------------------')
     print(tree)
