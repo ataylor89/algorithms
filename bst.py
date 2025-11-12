@@ -1,43 +1,82 @@
-# In bst.py, I take an iterative approach to implementing the binary search tree algorithms (insert, search, balance, etc)
+# In bst.py, I take a recursive approach, whereas in bst2.py, I take an iterative approach
+#
+# Recursion means that a function is calling itself
+#
+# Iteration means that a loop is being used to repeat a set of instructions
+#
+# So recursion implies that a function is calling itself
+#
+# Iteration implies loops
+#
+# It is often the case that iteration is more efficient than recursion, because there is an overhead to each function call
+# (Every time we call a function, we push a new stack frame onto the stack)
+#
+# On the other hand, recursion is often easier, simpler, and more elegant than iteration
+#
+# So there's a tradeoff...
+#
+# Recursion can be easier to implement, but iteration can be more efficient with respect to speed and memory
+#
+# I wanted to show both approaches to creating a binary search tree (the recursive approach and the iterative approach)
+#
+# It's also a good opportunity to learn about recursion and iteration
+#
+# Recursion and iteration are important tools in algorithm design
+#
+# I mentioned the stack earlier
+#
+# You might be wondering, "What is the stack?"
+#
+# When a process gets started, the operating system gives it its own virtual address space
+#
+# The virtual address space includes a stack, a heap, a code segment, and a data segment
+#
+# The stack is a convenient structure for storing data
+#
+# From an assembly perspective, two of the most convenient ways of storing data are...
+# 1) Registers
+# 2) The stack
+#
+# We can also allocate memory on the heap, but that takes more time than pushing data onto the stack
 # 
-# Iteration means that we are using loops to repeat a set of instructions
+# So, to return to the original point I was making, about recursion...
 #
-# In bst2.py, I take a recursive approach to implementing the binary search tree algorithms
+# Every time we call a function, we push data onto the stack
 #
-# Recursion is when a function calls itself
+# The data that we push depends on the CPU architecture, but...
 #
-# Iteration is often preferable to recursion, because it is more efficient with respect to speed and memory
+# We often push a function's arguments, local variables, and return address onto the stack
 #
-# There is actually some overhead to a function call
+# Also, we sometimes push callee-saved registers onto the stack
 #
-# When we call a function, we push a new stack frame onto the stack
+# This means that there is overhead to every function call
 #
-# So if we call a recursive function a thousand times, then we push a new stack frame onto the stack a thousand times
+# With each function call, we have to perform many I/O operations on the stack
 #
-# This involves a lot of I/O operations with the stack (the stack is a section of dynamic memory)
-# 
-# If we use iteration instead, then we can avoid a lot of unnecessary I/O operations
+# When a function returns, we have to perform more I/O operations, because we pop data from the stack to return it to the way it used to be before the function was called
 #
-# This is why iteration is often preferable to recursion
-# 
-# I wanted to demonstrate both the iterative approach and the recursive approach, which is why I have two files instead of one: bst.py demonstrates the iterative approach, and bst2.py demonstrates the recursive approach
+# I wanted to point out that there is overhead to each function call, and explain what this overhead consists of
 #
-# Honestly, I think that bst.py is a lot more efficient
+# Because of the overhead associated with each function call, iteration is often more efficient than recursion
 #
-# We can also run into an error where the recursion limit is exceeded, when we opt for recursion
+# But, as I said before, there is a tradeoff
 #
-# One workaround is to increase the recursion limit (by means of sys.setrecursionlimit)
+# Iteration is often more efficient, but recursion is often easier to implement
 #
-# But even if we increase the recursion limit, there is still a lot of overhead to recursive function calls
+# I think it's really useful to know both approaches: iteration and recursion
 #
-# So I think that bst.py is a lot more efficient, but I wanted to show both approaches
+# If you consider our quicksort algorithm in quicksort.py, you'll notice that it is a lot easier to write this algorithm in a recursive way than it is to write this algorithm in an iterative way
 #
-# I think this is a good stopping point
+# In fact, I do not know an iterative way of writing the quicksort algorithm
 #
-# Today is Tuesday, November 11, 2025
+# (I only know the recursive implementation)
 #
-# I have some work to do, but I am also going to watch TV and take it easy
-# 
+# There's a big question in computer science: can every recursive algorithm be turned into an iterative algorithm?
+#
+# If the answer to this question is yes, then it is true in theory, but it is still difficult in practice
+#
+# A lot of tasks are made easier by recursion, so I think it's really useful to know both iteration and recursion
+#
 # To summarize, iteration implies loops, and recursion implies that a function is calling itself
 #
 # Iteration and recursion are two important concepts in the study of algorithms
