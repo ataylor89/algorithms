@@ -235,7 +235,7 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--size', type=float, default=10)
     parser.add_argument('-min', '--minimum', type=float, default=0)
     parser.add_argument('-max', '--maximum', type=float, default=100)
-    parser.add_argument('-t', '--test', nargs='+', type=int, required=True) 
+    parser.add_argument('-t', '--test', nargs='+', type=int)
     args = parser.parse_args()
     if args.inputfile:
         with open(args.inputfile, 'r') as file:
@@ -259,31 +259,32 @@ if __name__ == '__main__':
     print('String representation')
     print('------------------------------')
     print(tree)
-    print('')
-    print('Linear search results')
-    print('------------------------------')
-    for i in range(len(args.test)):
-        value = args.test[i]
-        start_time = time.time()
-        found = False
-        for j in range(len(arr)):
-            if value == arr[j]:
-                found = True
-                break
-        time_elapsed = 1000 * (time.time() - start_time)
-        print(f'{value} is present' if found else f'{value} is missing')
-        print(f'The linear search took {time_elapsed:.4f} milliseconds')
-        if i < len(args.test) - 1:
-            print('')
-    print('')
-    print('Binary search results')
-    print('------------------------------')
-    for i in range(len(args.test)):
-        value = args.test[i]
-        start_time = time.time()
-        found = tree.search(value)
-        time_elapsed = 1000 * (time.time() - start_time)
-        print(f'{value} is present' if found else f'{value} is missing')
-        print(f'The binary search took {time_elapsed:.4f} milliseconds')
-        if i < len(args.test) - 1:
-            print('')
+    if args.test:
+        print('')
+        print('Linear search results')
+        print('------------------------------')
+        for i in range(len(args.test)):
+            value = args.test[i]
+            start_time = time.time()
+            found = False
+            for j in range(len(arr)):
+                if value == arr[j]:
+                    found = True
+                    break
+            time_elapsed = 1000 * (time.time() - start_time)
+            print(f'{value} is present' if found else f'{value} is missing')
+            print(f'The linear search took {time_elapsed:.4f} milliseconds')
+            if i < len(args.test) - 1:
+                print('')
+        print('')
+        print('Binary search results')
+        print('------------------------------')
+        for i in range(len(args.test)):
+            value = args.test[i]
+            start_time = time.time()
+            found = tree.search(value)
+            time_elapsed = 1000 * (time.time() - start_time)
+            print(f'{value} is present' if found else f'{value} is missing')
+            print(f'The binary search took {time_elapsed:.4f} milliseconds')
+            if i < len(args.test) - 1:
+                print('')
