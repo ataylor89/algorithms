@@ -160,6 +160,10 @@ class BinarySearchTree:
 
     def balance(self):
         arr = self.tolist()
+        self.root = None
+        self.node_count = 0
+        self.value_count = 0
+        self.height = 0
         self._balance(arr, 0, len(arr) - 1)
 
     def _insert(self, node, value):
@@ -188,6 +192,32 @@ class BinarySearchTree:
 
     def search(self, value):
         return self._search(self.root, value)
+
+    def get_successor(self, node):
+        node = node.right
+        while node is not None and node.left is not None:
+            node = node.left
+        return node
+
+    def _delete(self, node, value):
+        if node is None:
+            return None
+        elif value < node.value:
+            node.left = self._delete(node.left, value)
+        elif value > node.value:
+            node.right = self._delete(node.right, value)
+        else:
+            if node.left is None:
+                return node.right
+            if node.right is None:
+                return node.left
+            succ = self.get_successor(node)
+            node.value = succ.value
+            node.right = self._delete(node.right, succ.value)
+        return node
+
+    def delete(self, value):
+        self.root = self._delete(self.root, value)
 
     # We perform an inorder traversal to get a list of values in increasing order
     def _tolist(self, node, arr):
