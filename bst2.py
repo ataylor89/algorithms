@@ -1,57 +1,3 @@
-# ###### Examples ######
-#
-# Example #1:
-#
-# % cat unsorted.txt
-# [7, 6, 5, 0, 8, 6, 8, 1, 6, 7]
-#
-# % python bst.py -i unsorted.txt -t 2
-# The binary search tree has a height of 4
-#
-# Linear search
-# --------------
-# 2 is missing
-# The linear search took 0.0041 milliseconds
-#
-# Binary search
-# --------------
-# 2 is missing
-# The binary search took 0.0012 milliseconds
-#
-# Example #2:
-#
-# % python bst.py -n 10 2 12 4 7 8 9 20 30 4 7 5 -t 11
-# Unsorted list:
-#
-# [10, 2, 12, 4, 7, 8, 9, 20, 30, 4, 7, 5]
-#
-# The binary search tree has a height of 5
-#
-# Linear search
-# --------------
-# 11 is missing
-# The linear search took 0.0041 milliseconds
-#
-# Binary search
-# --------------
-# 11 is missing
-# The binary search took 0.0010 milliseconds
-#
-# Example #3:
-#
-# % python bst.py -r -s 1e4 -min 0 -max 1e4 -t 1337
-# The binary search tree has a height of 21
-#
-# Linear search
-# --------------
-# 1337 is present
-# The linear search took 0.0830 milliseconds
-#
-# Binary search
-# --------------
-# 1337 is present
-# The binary search took 0.0029 milliseconds
-
 import random
 import time
 import argparse
@@ -96,21 +42,28 @@ class BinarySearchTree:
         height = 1
         done = False
         while not done:
-            if value <= node.value and node.left is None:
-                node.left = Node(value)
+            if value == node.value:
+                node.frequency += 1
                 self.arr.append(value)
                 done = True
-            elif value <= node.value:
+            elif value < node.value and node.left is None:
+                node.left = Node(value)
+                self.arr.append(value)
+                height += 1
+                done = True
+            elif value < node.value:
                 node = node.left
+                height += 1
             elif value > node.value and node.right is None:
                 node.right = Node(value)
                 self.arr.append(value)
+                height += 1
                 done = True
             elif value > node.value:
                 node = node.right
-            height += 1
-            if height > self.height:
-                self.height = height
+                height += 1
+        if height > self.height:
+            self.height = height
 
     def search(self, value):
         if self.root is None:
@@ -142,24 +95,26 @@ class BinarySearchTree:
             return f'{node.value}({leftchild})({rightchild})'
 
     def str(self):
-        if len(self.arr) <= 100:
-            return self._str(self.root)
+        return self._str(self.root)
+
+    def __str__(self):
+        return self.str()
+
+    def stats(self):
         root_value = self.root.value
         size = len(self.arr)
         height = self.height
         return f'Root value: {root_value} Size: {size} Height: {height}'
-
-    def __str__(self):
-        return self.str()
 
 class Node:
     def __init__(self, value):
         self.value = value
         self.left = None
         self.right = None
+        self.frequency = 1
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog='bst.py', description='Binary search')
+    parser = argparse.ArgumentParser(prog='bst2.py', description='Binary search')
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('-i', '--inputfile', type=str)
     group.add_argument('-n', '--numbers', nargs='+', type=int) 
@@ -178,17 +133,19 @@ if __name__ == '__main__':
     elif args.random:
         size, min, max = int(args.size), int(args.minimum), int(args.maximum)
         arr = [random.randint(min, max) for i in range(size)]
-    if len(arr) < 1000:
+    if len(arr) <= 1000:
         print(f'Unsorted list')
         print('------------------------------')
         print(f'{arr}\n')
     tree = BinarySearchTree(arr)
     print('Statistics')
     print('------------------------------')
-    print(f'The binary search tree has a size of {len(tree.arr)} and a height of {tree.height}\n')
-    print('String representation')
-    print('------------------------------')
-    print(tree)
+    print(tree.stats())
+    if len(arr) <= 1000:
+        print('')
+        print('String representation')
+        print('------------------------------')
+        print(tree)
     if args.test:
         print('')
         print('Linear search results')
