@@ -98,7 +98,7 @@
 #
 # Anyway, I think it is time to wrap things up and summarize our discussion
 #
-# In these comments we asked, "What is an algorithm? What is a datastructure? What is recursion? What is iteration?"
+# In these comments we asked, "What is an algorithm? What is a data structure? What is recursion? What is iteration?"
 #
 # An algorithm is a list of instructions
 #
