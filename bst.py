@@ -1,85 +1,128 @@
-# In bst.py, I take a recursive approach, whereas in bst2.py, I take an iterative approach
+# ###### Introduction ######
+#
+# Binary search trees teach us a lot about algorithms and data structures
+#
+# What is an algorithm? What is a data structure?
+#
+# In my opinion an algorithm is a list of instructions
+#
+# In my opinion a data structure is a database
+#
+# We have many synonyms for the word "database"
+#
+# The word "table" is synonymous with the word "database" (e.g. a primetable is a database of primes)
+#
+# The word "data structure" is synonymous with the word "database"
+#
+# You could argue that, in some contexts, these words have slightly different meanings
+#
+# For example, a MySQL table is different from a MySQL database
+#
+# (A MySQL database often consists of many tables)
+#
+# But I think this is just an inherent feature of the English language
+#
+# An English language word can have many meanings
+#
+# The word "table" can generically refer to a database, or it can specifically refer to a MySQL table
+#
+# The word "table" has multiple definitions, and one definition of table is "database"
+#
+# So we have spent some time talking about databases
+#
+# Now let's talk about algorithms
+#
+# The binary search tree algorithms lend themselves to recursion
+#
+# It is possible to implement the insert, search, and balance methods in an iterative manner
+#
+# But it is easier and more elegant to implement these methods in a recursive manner
+#
+# What is recursion? What is iteration?
 #
 # Recursion means that a function is calling itself
 #
-# Iteration means that a loop is being used to repeat a set of instructions
+# Iteration means that we are using a loop to repeat a set of instructions
 #
 # So recursion implies that a function is calling itself
 #
 # Iteration implies loops
 #
-# It is often the case that iteration is more efficient than recursion, because there is an overhead to each function call
-# (Every time we call a function, we push a new stack frame onto the stack)
+# At the time of writing, every binary search tree algorithm contained in this file is implemented recursively
 #
-# On the other hand, recursion is often easier, simpler, and more elegant than iteration
+# I also used wrapper methods to simplify the interface
 #
-# So there's a tradeoff...
+# The caller does not need to have a reference to the root node in order to call the tree functions
 #
-# Recursion can be easier to implement, but iteration can be more efficient with respect to speed and memory
+# It is important to see what our tree looks like, to visualize our tree, so I implemented a str() method
 #
-# I wanted to show both approaches to creating a binary search tree (the recursive approach and the iterative approach)
+# The str() method uses prefix notation to visualize our tree
 #
-# It's also a good opportunity to learn about recursion and iteration
+# (The str() method uses a preorder traversal, whereas the tolist() method uses an inorder traversal)
 #
-# Recursion and iteration are important tools in algorithm design
+# Returning to the subject of data structures, you might ask, "Why do we have binary search trees?"
 #
-# I mentioned the stack earlier
+# Binary search trees are useful because they can reduce search time
 #
-# You might be wondering, "What is the stack?"
+# The average case performance for a binary search, in a balanced binary search tree, is O(log n)
 #
-# When a process gets started, the operating system gives it its own virtual address space
+# This is better than a naive search on an unsorted list, which has an average case performance of O(n)
 #
-# The virtual address space includes a stack, a heap, a code segment, and a data segment
+# I think that even a linear search on a sorted list has an average case performance of O(n)
 #
-# The stack is a convenient structure for storing data
+# So binary search reduces the time complexity of searching from O(n) to O(log n)
 #
-# From an assembly perspective, two of the most convenient ways of storing data are...
-# 1) Registers
-# 2) The stack
+# I think that many databases, like Oracle and MySQL, use trees to reduce search time
 #
-# We can also allocate memory on the heap, but that takes more time than pushing data onto the stack
-# 
-# So, to return to the original point I was making, about recursion...
+# When we index an Oracle table or a MySQL table, it creates a search tree in the background
 #
-# Every time we call a function, we push data onto the stack
+# You might ask, "Do they use binary search trees to index tables?"
 #
-# The data that we push depends on the CPU architecture, but...
+# I think they actually use something slightly different from binary search trees
 #
-# We often push a function's arguments, local variables, and return address onto the stack
+# I think they actually use b-trees
 #
-# Also, we sometimes push register values onto the stack, so that we can restore these values when the function returns
+# But in theory, I think that we can use a binary search tree to index a table in a relational database
 #
-# This means that there is overhead to every function call
+# In a long-running application (like a server that has constant uptime) a binary search tree can save time on searching
 #
-# With each function call, we have to perform many I/O operations on the stack
+# It is common for a database to have constant uptime, so you can see why trees are used to index tables
 #
-# When a function returns, we have to perform more I/O operations, because we pop data from the stack to return it to the way it used to be before the function was called
+# I'll say it once again... in theory, I think that we can use a binary search tree to index a database table
 #
-# I wanted to point out that there is overhead to each function call, and explain what this overhead consists of
+# In practice, b-trees are used, but in theory, I think that binary search trees can be used as well
 #
-# Because of the overhead associated with each function call, iteration is often more efficient than recursion
+# A good exercise would be creating a database that uses binary search trees to index tables
 #
-# But, as I said before, there is a tradeoff
+# I might get around to this sometime
 #
-# Iteration is often more efficient, but recursion is often easier to implement
+# Anyway, I think it is time to wrap things up and summarize our discussion
 #
-# I think it's really useful to know both approaches: iteration and recursion
+# In these comments we asked, "What is an algorithm? What is a datastructure? What is recursion? What is iteration?"
 #
-# If you consider our quicksort algorithm in quicksort.py, you'll notice that it is a lot easier to write this algorithm in a recursive way than it is to write this algorithm in an iterative way
+# An algorithm is a list of instructions
 #
-# In fact, I do not know an iterative way of writing the quicksort algorithm
+# A data structure is a database
 #
-# (I only know the recursive implementation)
+# Recursion means that a function is calling itself
 #
-# There's a big question in computer science: can every recursive algorithm be turned into an iterative algorithm?
+# Iteration means that we are using a loop to repeat a set of instructions
 #
-# If the answer to this question is yes, then it is true in theory, but it is still difficult in practice
+# Binary search trees are an important type of data structure
 #
-# A lot of tasks are made easier by recursion, so I think it's really useful to know both iteration and recursion
+# The binary search tree algorithms lend themselves well to recursion
 #
-# To summarize, iteration implies loops, and recursion implies that a function is calling itself
+# I think we can end on this note
 #
-# Iteration and recursion are two important concepts in the study of algorithms
+# Today is Saturday, November 15, 2025
+#
+# I'm listening to a song called Skel by Sigur Ros
+#
+# I have been listening to Sigur Ros's music since high school
+#
+# I wish everyone a nice weekend
+#
+# Andrew
 #
 # ###### Examples ######
 #
