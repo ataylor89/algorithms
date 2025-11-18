@@ -37,7 +37,7 @@ def ShR(x, n):
     return x >> n
 
 def RotR(x, n):
-    return x >> n | (x << (32 - n))
+    return mod32(x >> n | (x << (32 - n)))
 
 def Ch(x, y, z):
     return (x & y) ^ (~x & z)
