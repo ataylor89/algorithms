@@ -142,17 +142,13 @@
 #
 # If a record has a key of A and the root node has a key of R, and A < R, then the record with the key of A would get inserted somewhere in the left subtree of the root node
 #
-# If a record has a key of B and the root node has a key of R, and B > R, then the record with the key of B would get inserted somewhere inthe right subtree of the root node
+# If a record has a key of B and the root node has a key of R, and B > R, then the record with the key of B would get inserted somewhere in the right subtree of the root node
 #
 # You can see how we use a key to organize a red-black tree (or more generally, a binary search tree)
 #
-# We can create a key from a set of indexed columns either by concatenating the columns, creating a hash code, or by some other means
-#
-# We need the key to be comparable, so that for two keys A and B, one of the following holds true: A < B, A == B, or A > B
-#
 # We can create a key from a set of indexed columns by concatenating the columns, generating a hash code, or by some other means
 #
-# I don't want to be too repetitive, but sometimes repetition helps
+# We need the key to be comparable, so that for two keys A and B, one of the following holds true: A < B, A == B, or A > B
 #
 # I think we have rounded off this subject (which means, we have brought it to a conclusion)
 #
